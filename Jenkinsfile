@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    environment { 
+        registry = "kesh1990/tomcat-demo" 
+        registryCredential = 'dock_hub_id' 
+        dockerImage = '' 
+    }
+    
     tools{
         maven 'Maven'
         jdk 'Java'
