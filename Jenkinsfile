@@ -27,9 +27,27 @@ pipeline {
             }
         }
         
-        stage ('Creating Container Image') {
-            steps {
-                sh 'docker build -t tomcat-demo:${BUILD_NUMBER} .'
+        stage('Creating Container Image') { 
+            steps { 
+                script { 
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                }
+            } 
+        }
+        
+        stage('Pushing image to dockerhub') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+                    }
+                } 
+            }
+        } 
+        
+        stage('Cleaning up') { 
+            steps { 
+                sh "docker rmi $registry:$BUILD_NUMBER" 
             }
         }
     }
