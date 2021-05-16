@@ -17,7 +17,7 @@ pipeline {
 
         stage ('Pull Source Code') {
             steps {
-                git branch: 'master', url: "https://github.com/javabycode/spring-boot-maven-example-helloworld"
+                git branch: 'master', url: "https://github.com/Flaircrafter/spring-boot-maven-example-helloworld.git"
             }
         }
 
