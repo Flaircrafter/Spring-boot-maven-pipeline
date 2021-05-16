@@ -26,5 +26,11 @@ pipeline {
                 sh 'mvn -Dmaven.test.failure.ignore=true install'
             }
         }
+        
+        stage ('Creating Container Image') {
+            steps {
+                sh 'docker build -t tomcat-demo:${BUILD_NUMBER} .'
+            }
+        }
     }
 }
