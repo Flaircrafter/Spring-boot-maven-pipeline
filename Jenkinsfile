@@ -56,5 +56,13 @@ pipeline {
                 sh "docker rmi $registry:$BUILD_NUMBER" 
             }
         }
+        
+        stage('Deploy App') {
+            steps {
+                script {
+                  kubernetesDeploy(configs: "kube/nginx.yml", kubeconfigId: "kube_conf")
+                }
+            }
+        }
     }
 }
